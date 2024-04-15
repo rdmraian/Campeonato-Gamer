@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import CadastroGamer from "./src/modules/CadastroGamer";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialIcons";
+import Home from "./src/modules/Home";
 
 export default function App() {
+  const Tab = createBottomTabNavigator();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "tomato"
+          },
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveTintColor: "gray"
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarColor: "white",
+            tabBarLabelStyle: { fontSize: 16 },
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Cadastro"
+          component={CadastroGamer}
+          options={{
+            title: "Cadastro",
+            tabBarColor: "white",
+            tabBarLabelStyle: { fontSize: 16 },
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="person-add-alt-1"
+                color={color}
+                size={26}
+              />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
